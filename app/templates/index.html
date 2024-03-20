@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detector</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='a.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+ 
+<!--bootstrap link-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<!--font cdn-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<!--google font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Salsa&display=swap" rel="stylesheet">
+
+</head>
+<body>
+  <!--navbar start-->
+  <nav class="navbar navbar-expand-lg  " id="navbar">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html" id="logo"><span>D</span>etector</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" >
+        <span> <i class="fa-solid fa-bars"></i></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mynavbr">
+        <ul class="navbar-nav me-auto " >
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#detect">Detect</a>
+          </li>
+         
+          <li class="nav-item">
+            <a class="nav-link" href="#imge">Image_MAL</a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+        
+          
+        </ul>
+        
+        
+      </div>
+    </div>
+  </nav>
+  <!--navbar end-->
+
+   <!--home section start-->
+<!-- Home section start -->
+<div class="home" id="home">
+  <div class="content">
+    <h5>Application Malware Detection</h5>
+    <h1>Detect Your Malware<span class="changecontent"></span></h1>
+    <p>Start Detecting Now to protect your system</p>
+    <a href="#detect" class="btn">Detect_App</a>
+    <a href="#imge" class="btn">Detect_Img</a>
+  </div>
+</div>
+<!-- Home end -->
+  <!-- Detect section start -->
+  <section class="detect" id="detect">
+    <div class="container">
+      <div class="main-text">
+        <h1><span>D</span>etect</h1>
+      </div>
+      <h3 class="is-size-5">APK Classification</h3>
+      <br>
+      <form method="POST" enctype="multipart/form-data" id="form">
+        <div class="field">
+          <label class="label" id="lb1">Algorithm</label>
+          <div class="control">
+            <div class="select">
+              <select name="algorithm" class="selectpicker form-control" id="sel">
+                {% for algorithm in algorithms %}
+                <option value="{{ algorithm }}">{{ algorithm }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="field">
+          <label class="label">Upload App</label>
+          <div class="control">
+            <div class="file" id="fil1">
+              <input type="file" name="file">
+            </div>
+          </div>
+          
+          <input type="submit" class="button is-primary is-outlined is-small form-control" value="Predict">
+        </div>
+      </form>
+      <div class="col">
+        <div>
+          <h5 class="is-size-4">Output </h5>
+          <br>
+          <h6 class="is-size-6">Predicted Class: &nbsp; {{ result_apk }} </h6>
+          <h6>Model Accuracy: {{accuracy }} </h6>
+          <hr>
+          <h5 class="is-size-4">Metadata</h5>
+          <br>
+          <h6>App Name: {{ name }} </h6>
+          <h6>Target SDK Version: {{ sdk }} </h6>
+          <h6>File size: {{ size }} </h6>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Detect end -->
+<!-- Image section start -->
+<section class="image"  id="imge">
+  <h1><span>Detect</span> Malicious image</h1>
+  <h2>check your image malware by uploading it here </h2>
+  <br><br>
+  <form method="post" enctype="multipart/form-data" id="form2">
+    <input type="file" name="file" accept="image/*" id="fi3">
+    <input type="submit" value="Detect"  id="btn5">
+  </form>
+  <div class="col" id="imgr">
+    <h2 class="is-size-4"><span>R</span>esult</h2>
+    
+    {% if result_image %}
+  <div class="res" >
+    <h6 class="is-size-6" >Output:{{ result_image }}</h6>
+    
+    <h6>Image Name: {{ image_name }}</h6>
+    <h6>Creation Date: {{ creation_date }}</h6>
+    <h6>Dimensions: {{ dimensions }}</h6>
+    </div>
+    {% endif %}
+    
+  </div>
+  
+  <div class="card" id="cd">
+    <img src="static/img/img.jfif" alt="img">
+</div>
+</div>
+
+</section>
+<!-- Image end -->
+ <!--about section-->
+ <section class="about" id="about">
+  <div class="container">
+    <div class="main-txt">
+      <h1>About<span>Us</span></h1>
+    </div>
+    <div class="row" style="margin-top: 50px;">
+      <div class="col-md-6 py-3 py-md-0">
+        <div class="card">
+          <img src="static/img/a.jfif" alt="img">
+      </div>
+    </div>
+    <div class="col-md-6 py-3 py-md-0">
+      <h1>How Android Malware Detection Works</h1>
+      <p>  
+      Welcome to Android Malware Detection, your trusted source for safeguarding your Android devices against malicious software threats. At Android Malware Detection, we understand the paramount importance of security in the digital age, especially with the increasing reliance on smartphones and tablets for various aspects of daily life.
+       <h1>Our Mission</h1>
+       Our mission is simple yet crucial: to provide comprehensive and effective solutions to detect, prevent, and eliminate malware threats targeting Android devices. We strive to empower users with the knowledge and tools necessary to protect their devices and personal data from evolving cyber threats.
+  <h1 >Our Commitment to Excellence</h1>
+  At Android Malware Detection, we are dedicated to excellence in everything we do. We are constantly refining and improving our solutions to deliver the highest level of performance and reliability to our users. Whether you're a casual smartphone user or a business professional, you can trust Android Malware Detection to keep your Android device safe and secure.
+  
+      </p>
+      <a href="#home" class="btn1">BACK_tO_Home</a>
+    </div>
+  </div>
+
+</div>
+ </section>
+ <!--footer start-->
+ <footer id="footer">
+  <h1><Span>D</Span>etection</h1>
+  <p>safe and secure your devices and personal data with our Detector website which detct your image malware and app malware. </p>
+<div class="social-links">
+  <i class="fa-brands fa-twitter"></i>
+  <i class="fa-brands fa-facebook"></i>
+  <i class="fa-brands fa-instagram"></i>
+  <i class="fa-brands fa-youtube"></i>
+  <i class="fa-brands fa-pinterest-p"></i>
+</div>
+<div class="credit">
+  <p>Designed by</p>
+</div>
+<div class="copyrights">
+  <p>&copy;copyrights PK coding. All right reserved</p>
+</div>
+</footer>
+<!--footer end-->
+
+
+
+</body>
+</html>
