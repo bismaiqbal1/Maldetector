@@ -11,7 +11,7 @@ from datetime import datetime
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = './static/upload/'
 app.config['IMAGE_UPLOAD_FOLDER'] = './static/images/'
-app.config['SECRET_KEY'] = 'd3Y5d5nJkU6CdwY'
+app.config['SECRET_KEY'] = ''
 
 if not os.path.exists(app.config['UPLOAD_FOLDER']):
     os.makedirs(app.config['UPLOAD_FOLDER'])
