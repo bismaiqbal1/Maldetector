@@ -121,14 +121,7 @@ def home():
     return render_template("index.html", result_apk=result_apk, result_image=result_image, algorithms=algorithms.keys(),
                            accuracy=accuracy, name=name, sdk=sdk, size=size, image_name=image_name,
                            creation_date=creation_date, dimensions=dimensions)
-def delete():
-    files = os.listdir("static/images")
-    for f in files:
-        os.remove(f"static/images/{f}")
 
-if __name__ == "__main__":
-    schedule.every().day.at("10:30").do(delete)
-    app.run( debug=True)
 
 
 
